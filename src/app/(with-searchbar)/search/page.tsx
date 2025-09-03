@@ -1,15 +1,11 @@
 import BookItem from "@/components/book-item";
 import { BookData } from "@/types";
+import { Suspense } from "react";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string }>;
-}) {
-  const { q } = await searchParams;
+async function SearchResult({ q }: { q: string }) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/search?q=${q}`,
-    {cache : 'force-cache'}
+    { cache: "force-cache" }
   );
   if (!response.ok) {
     return <div>오류가 발생했습니다...</div>;
@@ -22,5 +18,17 @@ export default async function Page({
         <BookItem key={book.id} {...book} />
       ))}
     </div>
+  );
+}
+
+export default function Page({
+  searchParams,
+}: {
+  searchParams: { q?: string };
+}) {
+  return (
+    <Suspense key={searchParams.q || ""} fallback={<div>Loading ...</div>}>
+      <SearchResult q={searchParams.q || ""} />
+    </Suspense>
   );
 }
