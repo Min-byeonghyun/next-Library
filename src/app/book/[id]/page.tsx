@@ -4,7 +4,6 @@ import { ReviewData } from "@/types";
 import ReviewItem from "@/components/review-item";
 import ReviewEditor from "@/components/review-editor";
 
-
 // export const dynamicParams = false;
 export function generateStaticParams() {
   return [{ id: "1" }, { id: "2" }, { id: "3" }];
@@ -42,21 +41,21 @@ async function BookDetail({ bookId }: { bookId: string }) {
   );
 }
 
-
-
 async function ReviewList({ bookId }: { bookId: string }) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/review/book/${bookId}`)
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/review/book/${bookId}`
+  );
 
-  if(!response.ok) {
-    throw new Error(`Review fetch Failed : ${response.statusText}`)
+  if (!response.ok) {
+    throw new Error(`Review fetch Failed : ${response.statusText}`);
   }
 
-  const reviews : ReviewData[] = await response.json();
+  const reviews: ReviewData[] = await response.json();
 
   return (
     <section>
       {reviews.map((review) => (
-        <ReviewItem key={`review-item-${review.id}`} {...review}/>
+        <ReviewItem key={`review-item-${review.id}`} {...review} />
       ))}
     </section>
   );
