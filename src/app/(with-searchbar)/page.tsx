@@ -3,6 +3,7 @@ import style from "./page.module.css";
 import { BookData } from "@/types";
 import { Suspense } from "react";
 import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
+import { Metadata } from "next";
 
 // export const dynamic = 'force-dynamic'
 // 특정 페이지의 유형을 강제로 Static, Dynamic 페이지로 설정
@@ -48,6 +49,15 @@ async function RecoBooks() {
     </div>
   );
 }
+
+export const metadata: Metadata = {
+  title: "병현 북스",
+  description: "병현 북스에 등록된 도서를 만나보세요.",
+  openGraph: {
+    title: "병현 북스",
+    images: ["/thumbnail.png"],
+  },
+};
 
 export default function Home() {
   return (
