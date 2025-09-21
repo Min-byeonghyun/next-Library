@@ -25,9 +25,9 @@ async function SearchResult({ q }: { q: string }) {
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string }>;
+  searchParams: { q?: string };
 }): Promise<Metadata> {
-  const { q } = await searchParams;
+  const { q } = searchParams;
   //현재 페이지 메타 데이터를 동적으로 생성
   return {
     title: `${q} : 병현북스 검색`,
@@ -39,8 +39,6 @@ export async function generateMetadata({
     },
   };
 }
-
-
 
 export default async function Page({
   searchParams,
