@@ -1,8 +1,8 @@
 import BookItem from "@/components/book-item";
 import style from "./page.module.css";
 import { BookData } from "@/types";
-import { Suspense } from "react";
-import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
+// import { Suspense } from "react";
+// import BookListSkeleton from "@/components/skeleton/book-list-skeleton";
 import { Metadata } from "next";
 
 // export const dynamic = 'force-dynamic'
